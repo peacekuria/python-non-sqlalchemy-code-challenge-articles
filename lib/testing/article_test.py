@@ -1,8 +1,8 @@
 import pytest
 
-from classes.many_to_many import Article
-from classes.many_to_many import Magazine
-from classes.many_to_many import Author
+from lib.many_to_many import Article
+from lib.many_to_many import Magazine
+from lib.many_to_many import Author
 
 
 class TestArticle:
@@ -24,10 +24,10 @@ class TestArticle:
         magazine = Magazine("Vogue", "Fashion")
         article_1 = Article(author, magazine, "How to wear a tutu with style")
 
-        # comment out the next two lines if using Exceptions
-        article_1.title = 500
-        assert article_1.title == "How to wear a tutu with style"
-        
+        # Expect an AttributeError when trying to set the title
+        with pytest.raises(AttributeError):
+            article_1.title = 500
+
         assert isinstance(article_1.title, str)
 
         # uncomment the next two lines if using Exceptions
